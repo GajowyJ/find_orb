@@ -415,7 +415,7 @@ int integrate_orbitl( long double *orbit, const long double t0, const long doubl
    if( use_encke == -1)
       use_encke = atoi( get_environment_ptr( "ENCKE"));
    if( t0 > maximum_jd || t1 > maximum_jd
-                       || t0 < minimum_jd || t0 < minimum_jd)
+                       || t0 < minimum_jd || t1 < minimum_jd)
       {
       char buff[300];
 
@@ -472,7 +472,7 @@ int integrate_orbitl( long double *orbit, const long double t0, const long doubl
                  (double)JD_TO_YEAR( t), (double)JD_TO_YEAR( t0), (double)JD_TO_YEAR( t1));
          if( fabsl( stepsize) > .1)
             snprintf_append( buff, sizeof( buff), "%.3f   ", (double)stepsize);
-         else if( fabsl( stepsize) > .91)
+         else if( fabsl( stepsize) > .91)   // this condition never works
             snprintf_append( buff, sizeof( buff), "%.3fm   ",
                                           (double)stepsize * minutes_per_day);
          else
